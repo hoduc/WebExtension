@@ -1,6 +1,10 @@
 ul{
     list-style-type:none;
-    width: 550px;
+    height: 288px; // 3 item
+    width: 100px;
+    display:inline-block;
+    overflow:scroll;
+    overflow-x:hidden;
 }
 li{
     //padding: 10px;
