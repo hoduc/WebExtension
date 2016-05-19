@@ -1,6 +1,3 @@
-var UTUBE_BASE = "https://youtube.com";
-var UTUBE_SUB = UTUBE_BASE + "/feed/subsriptions";
-
 function loadXMLDoc(url, onDone) {
     var xmlhttp;
 
@@ -32,11 +29,12 @@ function loadXMLDoc(url, onDone) {
 
 function playRecommended()
 {
-    loadXMLDoc(UTUBE_BASE, onRecommendedReady);
+    loadXMLDoc("recommended.html", onRecommendedReady);
 }
 
 function onRecommendedReady(doc)
 {
+    console.log(doc);
     var recommended = doc.getElementsByClassName("feed-item-dismissable")[1];
     var ids = [];
     var ll = recommended.getElementsByClassName("yt-lockup-thumbnail contains-addto");//each square of videos
