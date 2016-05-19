@@ -71,7 +71,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
 	height: '390',
 	width: '640',
-	videoId: 'sCG0SBAeoV0', //bootstrapvideo
+	/*videoId: 'sCG0SBAeoV0', //bootstrapvideo*/
 	events: {
 	    'onReady': onPlayerReady,
 	    'onStateChange': onPlayerStateChange
@@ -83,6 +83,7 @@ function onYouTubeIframeAPIReady() {
 function onPlayerReady(event) {
     //hook up event to play next button
     var nextButton = document.getElementById("next");
+    playNext();
     nextButton.onclick=playNext;
     event.target.playVideo();
 }
