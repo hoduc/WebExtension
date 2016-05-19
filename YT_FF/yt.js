@@ -11,6 +11,7 @@ var yt=[
 ];
 
 var cur=-1;
+var player;
 
 function createThumbnails(ytli)
 {
@@ -37,6 +38,13 @@ function initializeYtList()
     createThumbnails(yt);
 }
 
+function playNext()
+{
+    var nextVideo = yt[++cur%yt.length];
+    player.cueVideoById(nextVideo.id, nextVideo.startSec, nextVideo.quality);
+    player.playVideo();
+}
+
 initializeYtList();
 
 // 2. This code loads the IFrame Player API code asynchronously.
@@ -46,7 +54,6 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
-var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
 	height: '390',
@@ -61,6 +68,9 @@ function onYouTubeIframeAPIReady() {
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
+    //hook up event to play next button
+    var nextButton = document.getElementById("next");
+    nextButton.onclick=playNext;
     event.target.playVideo();
 }
 
@@ -71,12 +81,11 @@ var done = false;
 function onPlayerStateChange(event) {
     /*play next in da loop*/
     if( event.data == YT.PlayerState.ENDED ) {
-	var nextVideo = yt[++cur%yt.length];
-	player.cueVideoById(nextVideo.id, nextVideo.startSec, nextVideo.quality);
-	player.playVideo();
+	playNext();
     }
 }
 
 function stopVideo() {
   player.stopVideo();
 }
+
