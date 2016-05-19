@@ -21,7 +21,9 @@ function createThumbnails(ytli)
 	var img = document.createElement("img");
 	img.src = "https://i.ytimg.com/vi/" + ytli[i].id + "/sddefault.jpg";
 	img.width = img.height = 128;
-	pl.appendChild(img);
+	var li = document.createElement("li");
+	li.appendChild(img);
+	pl.appendChild(li);
     }
 }
 
