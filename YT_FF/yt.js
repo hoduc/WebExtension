@@ -5,4 +5,64 @@ function YTVideo(id, startSec, quality)
     this.quality = quality || "large";
 }
 
-var yt=[];
+var yt=[
+    new YTVideo("jYXbep0SKzk"),
+    new YTVideo("Ec2mQCQI4RY")
+];
+
+var cur=-1;
+
+function createThumbnails(ytli)
+{
+    var pl = document.getElementById("playerList");
+    for (var i = 0 ; i < ytli.length; i++ )
+    {
+	var img = document.createElement("img");
+	img.src = "https://i.ytimg.com/vi/" + ytli[i].id + "/sddefault.jpg";
+	img.width = img.height = 128;
+	pl.appendChild(img);
+    }
+}
+
+createThumbnails(yt);
+// 2. This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+	height: '390',
+	width: '640',
+	videoId: 'sCG0SBAeoV0',
+	events: {
+	    'onReady': onPlayerReady,
+	    'onStateChange': onPlayerStateChange
+	}
+    });
+}
+
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+var done = false;
+function onPlayerStateChange(event) {
+    /*play next in da loop*/
+    if( event.data == YT.PlayerState.ENDED ) {
+	var nextVideo = yt[++cur%yt.length];
+	player.cueVideoById(nextVideo.id, nextVideo.startSec, nextVideo.quality);
+	player.playVideo();
+    }
+}
+
+function stopVideo() {
+  player.stopVideo();
+}
