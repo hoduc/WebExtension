@@ -47,11 +47,14 @@ function playNext()
     player.playVideo();
 
     //pop img-top, push to the end
-    if( cur > 0 )
+    if( cur >= 0 )
     {
 	var pl = document.getElementById("playerList");
-	var fc = pl.removeChild(pl.firstChild);
+	console.log("firstChild:" + pl.firstChild);
+	var fc = pl.firstElementChild;
+	pl.removeChild(fc);
 	pl.appendChild(fc);
+	console.log("after:" + pl);
     }
 }
 
