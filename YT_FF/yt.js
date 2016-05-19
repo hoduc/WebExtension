@@ -43,6 +43,14 @@ function playNext()
     var nextVideo = yt[++cur%yt.length];
     player.cueVideoById(nextVideo.id, nextVideo.startSec, nextVideo.quality);
     player.playVideo();
+
+    //pop img-top, push to the end
+    if( cur > 0 )
+    {
+	var pl = document.getElementById("playerList");
+	var fc = pl.removeChild(pl.firstChild);
+	pl.appendChild(fc);
+    }
 }
 
 initializeYtList();
