@@ -16,8 +16,20 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>Scripts/MangaArrow.js</string>
+			</array>
+		</dict>
+	</dict>
 	<key>Description</key>
 	<string>[&gt; &lt;] binding to turn the page</string>
+	<key>DeveloperIdentifier</key>
+	<string>0000000000</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
@@ -28,6 +40,8 @@
 			<array>
 				<string>*.truyentranhtuan.com</string>
 			</array>
+			<key>Include Secure Pages</key>
+			<true/>
 			<key>Level</key>
 			<string>Some</string>
 		</dict>
