@@ -1,4 +1,4 @@
-function handleMessage(event)
+/*function handleMessage(event)
 {
     alert("injected script receives message:" + event);
     //making sure it is our message
@@ -51,12 +51,14 @@ function playRecommended()
 
 
 
+*/
+
 function createContextItem(event)
 {
-    alert("adding context item");
+    console.log("adding context item");
     safari.self.tab.setContextMenuEventUserInfo(event, "Play Recommended");
 }
 
-alert("hello");
-safari.self.addEventListener("contextmenu", createContextItem, false);
+console.log("hello");
+document.addEventListener("contextmenu", createContextItem, false);
 //safari.self.addEventListener("message", handleMessage, false);
