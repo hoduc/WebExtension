@@ -1,21 +1,38 @@
 console.log("hello injected");
 var LEFT_ARROW = 74;
 var RIGHT_ARROW = 76;
+var UP_ARROW = 73;
+var DOWN_ARROW = 75;
+var yScrollPixel = 30; //y-scroll pixel
+
 
 document.onkeydown = keyPressHandler;
 
-var arrowKeys = [LEFT_ARROW, RIGHT_ARROW];
+var arrowKeys = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
+
 var arrowHandler =
 [
 	function(){
-	            clickArrow("backward-arrow");
-                 },
+	    clickArrow("backward-arrow");
+        },
 
         function(){
-	            clickArrow("forward-arrow");
-                  }
+	    clickArrow("forward-arrow");
+        },
+
+        function(){
+	    scrollY(-yScrollPixel);
+	},
     
+        function(){
+	    scrollY(yScrollPixel);
+	}
 ];
+
+function scrollY(yPixel)
+{
+    window.scrollBy(0,yPixel);
+}
 
 function getArrowNode(className)
 {
@@ -43,7 +60,7 @@ function clickArrow(className)
 function keyPressHandler(e)
 {
     console.log("keydown");
-    alert("keycode:" + e.keyCode);
+    console.log("keycode:" + e.keyCode);
     for( var i = 0 ; i < arrowKeys.length; i++ )
     {
 	if ( arrowKeys[i] == e.keyCode )
