@@ -1,6 +1,7 @@
 function handleContextMenu(event)
 {
     console.log("global:" + event.userInfo);
+    event.contextMenu.appendContextMenuItem("hello",event.userInfo);
 }
 
 
