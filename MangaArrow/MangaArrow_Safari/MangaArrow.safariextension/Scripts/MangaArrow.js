@@ -1,6 +1,6 @@
-#console.log("hello injected");
-var LEFT_ARROW = 37;
-var RIGHT_ARROW = 39;
+console.log("hello injected");
+var LEFT_ARROW = 74;
+var RIGHT_ARROW = 76;
 
 document.onkeydown = keyPressHandler;
 
@@ -43,7 +43,7 @@ function clickArrow(className)
 function keyPressHandler(e)
 {
     console.log("keydown");
-    console.log("keycode:" + e.keyCode);
+    alert("keycode:" + e.keyCode);
     for( var i = 0 ; i < arrowKeys.length; i++ )
     {
 	if ( arrowKeys[i] == e.keyCode )
