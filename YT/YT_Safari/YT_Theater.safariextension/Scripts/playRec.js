@@ -2,15 +2,8 @@ console.log("hello injected!");
 
 function getPlayRecommended()
 {
-    //alert("Hello Recommended");
     var recommended = document.getElementsByClassName("feed-item-dismissable");
-    /*if ( recommended != null )
-    {
-	safari.self.tab.dispatchMessage("pr_data", recommended);
-    }*/
     var recNode = null;
-    //console.log("node:");
-    //console.log(recommended.length);
     for( var i = 0; i < recommended.length; i++ )
     {
 	var rec = recommended[i].getElementsByClassName("branded-page-module-title-text");
@@ -38,9 +31,13 @@ function getPlayRecommended()
 	    test_link += ids[i] + "&";
 	}
 	test_link = test_link.substring(0, test_link.lastIndexOf("&"));
+	safari.self.tab.dispatchMessage("pr_data", test_link);
 	console.log(test_link);
-	window.open(test_link, '_blank');
-	window.focus;
+	//window.open(test_link, '_blank');
+	//window.focus;
+	//console.log("base url:" + safari.extension.baseURI);
+	//var newTab = safari.application.activeBrowserWindow.openTab();
+	//newTab.url = safari.extension.baseURI + 'test.html';
     }
 }
 
@@ -52,7 +49,7 @@ function createContextItem(event)
 
 function handleCommand(msg)
 {
-    console.log(msg);
+    //console.log(msg);
     if( msg.name == "yt_theater" )
     {
 	if( msg.message == "pr" )

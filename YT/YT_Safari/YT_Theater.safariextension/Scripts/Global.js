@@ -21,9 +21,13 @@ function handleCommand(event)
 
 function receiveMsg(event)
 {
-    if( event.nname == "pr_data" )
+    if( event.name == "pr_data" )
     {
-	console.log( event.message );
+	//console.log( event.message );
+	//open new tab
+	//console.log("prepare to open tab:");
+	safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + event.message;
+	//console.log("url="+ safari.extension.baseURI + event.message);
     }
 }
 
