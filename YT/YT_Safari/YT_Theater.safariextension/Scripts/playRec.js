@@ -1,27 +1,25 @@
 console.log("hello injected!");
 
-function getPlayRecommended()
+function getInterestedSegment(nodeName)
 {
-    var recommended = document.getElementsByClassName("feed-item-dismissable");
-    var recNode = null;
-    for( var i = 0; i < recommended.length; i++ )
+    var allInterestedNodes = document.getElementsByClassName("feed-item-dismissable");
+    var interestedNode = null;
+    for( var i = 0; i < allInterestedNodes.length; i++ )
     {
-	var rec = recommended[i].getElementsByClassName("branded-page-module-title-text");
-	if ( rec && rec[0].textContent == "Recommended" )
+	var rec = allInterestedNodes[i].getElementsByClassName("branded-page-module-title-text");
+	if ( rec && rec[0].textContent == nodeName )
 	{
-	    recNode = recommended[i];
+	    interestedNode = allInterestedNodes[i];
 	    break;
 	}
     }
-    console.log(recNode);
-    
-    if( recNode == null )
+    if( interestedNode == null )
     {
 	console.log("Cannot find any 'Recommended'");
     }
     else
     {
-	var ll = recNode.getElementsByClassName("yt-lockup-thumbnail contains-addto");//each square of videos
+	var ll = interestedNode.getElementsByClassName("yt-lockup-thumbnail contains-addto");//each square of videos
 	var ids = [];
 	for( var i = 0 ; i < ll.length; i++ ){
 	    ids.push( ll[i].firstChild.href.split("=")[1]);
@@ -33,11 +31,6 @@ function getPlayRecommended()
 	test_link = test_link.substring(0, test_link.lastIndexOf("&"));
 	safari.self.tab.dispatchMessage("pr_data", test_link);
 	console.log(test_link);
-	//window.open(test_link, '_blank');
-	//window.focus;
-	//console.log("base url:" + safari.extension.baseURI);
-	//var newTab = safari.application.activeBrowserWindow.openTab();
-	//newTab.url = safari.extension.baseURI + 'test.html';
     }
 }
 
@@ -55,7 +48,8 @@ function handleCommand(msg)
 	if( msg.message == "pr" )
 	{
 	    console.log( "u click: play recommended" );
-	    getPlayRecommended();
+	    // getPlayRecommended();
+	    getInterestedSegment("Recommended");
 	}
     }
 }
