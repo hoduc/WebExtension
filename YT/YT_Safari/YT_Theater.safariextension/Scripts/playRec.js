@@ -1,24 +1,13 @@
-/*function handleMessage(event)
-{
-    alert("injected script receives message:" + event);
-    //making sure it is our message
-    if( event.name == "yt_theater" )
-    {
-	var command = event.message;
-	alert( "what is the command:" + command );
-	if ( command == "playRec" )
-	{
-	    playRecommended();
-	}    
-    }
-}
+console.log("hello injected!");
 
-function playRecommended()
+function getPlayRecommended()
 {
-    alert("Hello Recommended");
+    //alert("Hello Recommended");
     var recommended = document.getElementsByClassName("feed-item-dismissable");
     var recNode = null;
-    for( int i = 0; i < recommended.length; i++ )
+    console.log("node:");
+    console.log(recommended);
+    /*for( int i = 0; i < recommended.length; i++ )
     {
 	var rec = recommended[i].getElementsByClassName("branded-page-module-title-text");
 	if ( rec && rec[0].textContent == "Recommended" )
@@ -46,12 +35,8 @@ function playRecommended()
 	test_link = test_link.substring(0, test_link.lastIndexOf("&"));
 	window.open(test_link, '_blank');
 	window.focus;
-    }
+    }*/
 }
-
-
-
-*/
 
 function createContextItem(event)
 {
@@ -59,6 +44,17 @@ function createContextItem(event)
     safari.self.tab.setContextMenuEventUserInfo(event, "Play Recommended");
 }
 
-console.log("hello");
+function handleCommand(msg)
+{
+    if( msg.name == "yt_theater" )
+    {
+	if( msg.message == "pr" )
+	{
+	    console.log( "u click: play recommended" );
+	    getPlayRecommended();
+	}
+    }
+}
+//console.log("hello");
 document.addEventListener("contextmenu", createContextItem, false);
-//safari.self.addEventListener("message", handleMessage, false);
+safari.self.addEventListener("message", handleCommand, false);
