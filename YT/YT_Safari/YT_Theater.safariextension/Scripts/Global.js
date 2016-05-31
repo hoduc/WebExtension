@@ -14,16 +14,20 @@ function handleCommand(event)
     if (event.command == "pr" )
     {
 	safari.application.activeBrowserWindow.activeTab.page.dispatchMessage("yt_theater", event.command);
+	//console.log(document.getElementsByClassName("feed-item-dismissable"));
     }
 }
 
 
-/*function receiveMsg(event)
+function receiveMsg(event)
 {
-    
-}*/
+    if( event.nname == "pr_data" )
+    {
+	console.log( event.message );
+    }
+}
 
 
-//safari.application.addEventListener("message", receiveMsg, false);
+safari.application.addEventListener("message", receiveMsg, false);
 safari.application.addEventListener("command", handleCommand, false);
 safari.application.addEventListener("contextmenu", handleContextMenu, false);
