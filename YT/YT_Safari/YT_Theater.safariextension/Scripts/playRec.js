@@ -1,4 +1,11 @@
 console.log("hello injected!");
+var dataObject =
+{
+    videoIds:[],
+    titles: [],
+    users: [],
+    u_links: []
+};
 
 function getHrefContentTuple(nodeName, t)
 {
@@ -61,27 +68,31 @@ function getInterestedSegment(nodeName)
 	    //console.log(tupleNode.firstChild);
 	    //console.log(tupleNode.firstChild);
 	    getHrefContentTuple( tupleNode, t );
-	    vids += t[0] + ",";
-	    titles += t[1] + ",";
+	    dataObject.videoIds.push(t[0]);
+	    dataObject.titles.push(t[1]);
+	    // vids += t[0] + ",";
+	    // titles += t[1] + ",";
 
 	    tupleNode = ll[i].getElementsByClassName("yt-lockup-byline");
 	    tupleNode = tupleNode[0];
 	    getHrefContentTuple( tupleNode, t );
-	    users += t[0] + ",";
-	    users_links += t[1] + ",";
+	    // users += t[0] + ",";
+	    // users_links += t[1] + ",";
+	    dataObject.users.push(t[0]);
+	    dataObject.u_links.push(t[1]);
 	    
 	}
-	vids = "[" + chopLastDelimeter(vids) + "]";
-	titles = "[" + chopLastDelimeter(titles) + "]";
-	users = "[" + chopLastDelimeter(users) + "]";
-	users_links = "[" + chopLastDelimeter(users_links) + "]";
+	// vids = "[" + chopLastDelimeter(vids) + "]";
+	// titles = "[" + chopLastDelimeter(titles) + "]";
+	// users = "[" + chopLastDelimeter(users) + "]";
+	// users_links = "[" + chopLastDelimeter(users_links) + "]";
 	
 	
     }
-    var jsonStr = "{ \"videoIds\" :" + "\"" + vids + "\"" + ", \"titles\":" + "\"" + titles + "\"" + "}";
-	//+ ", 'titles':" + titles + ", 'users':" + users + ", 'ulinks':" + users_links + " }";
-    console.log(jsonStr);
-    safari.self.tab.dispatchMessage("pr_data", jsonStr);
+    // var jsonStr = "{ \"videoIds\" :" + "\"" + vids + "\"" + ", \"titles\":" + "\"" + titles + "\"" + "}";
+    // 	//+ ", 'titles':" + titles + ", 'users':" + users + ", 'ulinks':" + users_links + " }";
+    // console.log(jsonStr);
+    safari.self.tab.dispatchMessage("pr_data", dataObject);
 }
 
 function createContextItem(event)
@@ -93,12 +104,12 @@ function createContextItem(event)
 function handleCommand(msg)
 {
     //console.log(msg);
+    //only handle relevant message
     if( msg.name == "yt_theater" )
     {
 	if( msg.message == "pr" )
 	{
 	    console.log( "u click: play recommended" );
-	    // getPlayRecommended();
 	    getInterestedSegment("Recommended");
 	}
     }

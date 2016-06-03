@@ -54,10 +54,19 @@ function initializeYtListLocalStorage()
     // {
     // 	yt.push( new YTVideo( vids[i], titles[i], users[i], ulinks[i] ) );
     // }
-    JSON.parse(localStorage.getItem( "yt_theater" ), function( k,v ){
-	console.log(k);
-    });
     // createThumbnails(yt);
+
+    var vids = localStorage.getItem("yt_ids").split(",");
+    var titles = localStorage.getItem("yt_titles").split(",");
+    var users = localStorage.getItem("yt_users").split(",");
+    var ulinks = localStorage.getItem("yt_ulinks").split(",");
+    var total = vids.length;
+    console.log(vids);
+    for( var i = 0 ; i < total; i++ )
+    {
+	yt.push( new YTVideo( vids[i], titles[i], users[i], ulinks[i] ) );
+    }
+    createThumbnails(yt);
 }
 
 
