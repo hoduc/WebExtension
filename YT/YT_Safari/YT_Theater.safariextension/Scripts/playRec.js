@@ -1,8 +1,9 @@
 console.log("hello injected!");
 
-function getHrefContentTuple(nodeName)
+function getHrefContentTuple(nodeName, t)
 {
-    return nodeName.firstChild.href.split("=")[1] + "," + nodeName.firstChild.textContent;
+    t[0] = nodeName.firstChild.href.split("=")[1];
+    t[1] = nodeName.firstChild.textContent;
 }
 
 function chopLastDelimeter(s, delimeter)
@@ -47,28 +48,41 @@ function getInterestedSegment(nodeName)
 	var vids = "";
 	var titles = "";
 	var users = "";
-	var user_links = "";
+	var users_links = "";
+	var t = [];
 	for( var i = 0; i < ll.length; i++ )
 	{
-	    var videoNode = ll[i].getElementsByClassName("yt-lockup-content");
-	    var t = getHrefContentTuple(videoNode.getElementsByClassName("yt-lockup-title contains-action-menu")).split(",");
-	    vids += t[0] + ",";
-	    titles += t[1] + ",";
-	    t = getHrefContentTuple( videoNode.getElementsByClassName("yt-lockup-byline") );
-	    users += t[0] + ",";
-	    user_links += t[1] + ",";
+	    //console.log(ll[i]);
+	    var tupleNode = ll[i].getElementsByClassName("yt-lockup-title contains-action-menu");
+	    tupleNode = tupleNode[0];
+	    //console.log(tupleNode);
+	    //console.log(tupleNode.firstChild);
+	    //console.log(tupleNode.firstChild);
+	    getHrefContentTuple( tupleNode, t );
+	    vids += t[0] + ";";
+	    titles += t[1] + ";";
+
+	    tupleNode = ll[i].getElementsByClassName("yt-lockup-byline");
+	    tupleNode = tupleNode[0];
+	    getHrefContentTuple( tupleNode, t );
+	    users += t[0] + ";";
+	    users_links += t[1] + ";";
 	    
 	}
-	chopLastDelimeter(vids);
-	chopLastDelimeter(titles);
-	chopLastDelimeter(users);
-	chopLastDelimeter(users_links);
+	chopLastDelimeter(vids, ";");
+	chopLastDelimeter(titles, ";");
+	chopLastDelimeter(users, ";");
+	chopLastDelimeter(users_links, ";");
 	
-	localStorage.setItem("videoIds", vids);
-	localStorage.setItem("titles", titles);
-	localStorage.setItem("users", users);
-	localStorage.setItem("ulinks", users_links);
+	
     }
+    localStorage.setItem("videoIds", vids);
+    localStorage.setItem("titles", titles);
+    localStorage.setItem("users", users);
+    localStorage.setItem("ulinks", users_links);
+    console.log("local Storage:");
+    console.log(localStorage);
+    safari.self.tab.dispatchMessage("pr_data", "test.html");
 }
 
 function createContextItem(event)

@@ -1,6 +1,9 @@
-function YTVideo(id, startSec, quality)
+function YTVideo(id, title, ytUser, ytUserLink, startSec, quality)
 {
     this.id = id;
+    this.title = title;
+    this.ytUser = ytUser;
+    this.ytUserLink = ytUserLink;
     this.startSec = startSec || 0;
     this.quality = quality || "large";
 }
@@ -27,18 +30,33 @@ function createThumbnails(ytli)
     }
 }
 
-function initializeYtList()
+// function initializeYtList()
+// {
+//     var query = window.location.search.substring(1);
+//     console.log("query=" + query);
+//     var videoIds = query.substring(query.indexOf("=")+1).split("&");
+//     console.log("videoIds:" + videoIds);
+//     for( var i = 0; i < videoIds.length; i++ )
+//     {
+// 	yt.push( new YTVideo( videoIds[i] ) );
+//     }
+//     createThumbnails(yt);
+// }
+
+function initializeYtListLocalStorage()
 {
-    var query = window.location.search.substring(1);
-    console.log("query=" + query);
-    var videoIds = query.substring(query.indexOf("=")+1).split("&");
-    console.log("videoIds:" + videoIds);
-    for( var i = 0; i < videoIds.length; i++ )
-    {
-	yt.push( new YTVideo( videoIds[i] ) );
-    }
-    createThumbnails(yt);
+    console.log(localStorage);
+    // var vids = localStorage.getItem("videoIds").split(",");
+    // var titles = localStorage.getItem("titles").split(",");
+    // var users = localStorage.getItem("users").split(",");
+    // var ulinks = localStorage.getItem("ulinks").split(",");
+    // for( var i = 0 ; i < vids.length; i++ )
+    // {
+    // 	yt.push( new YTVideo( vids[i], titles[i], users[i], ulinks[i] ) );
+    // }
+    // createThumbnails(yt);
 }
+
 
 function playNext()
 {
@@ -58,7 +76,7 @@ function playNext()
     }
 }
 
-initializeYtList();
+initializeYtListLocalStorage();
 
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
