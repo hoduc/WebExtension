@@ -45,10 +45,10 @@ function getInterestedSegment(nodeName)
 	//set local storage
 
 	var ll = interestedNode.getElementsByClassName("yt-shelf-grid-item");
-	var vids = "";
-	var titles = "";
-	var users = "";
-	var users_links = "";
+	var vids = "[";
+	var titles = "[";
+	var users = "[";
+	var users_links = "[";
 	var t = [];
 	for( var i = 0; i < ll.length; i++ )
 	{
@@ -59,30 +59,36 @@ function getInterestedSegment(nodeName)
 	    //console.log(tupleNode.firstChild);
 	    //console.log(tupleNode.firstChild);
 	    getHrefContentTuple( tupleNode, t );
-	    vids += t[0] + ";";
-	    titles += t[1] + ";";
+	    vids += t[0] + ",";
+	    titles += t[1] + ",";
 
 	    tupleNode = ll[i].getElementsByClassName("yt-lockup-byline");
 	    tupleNode = tupleNode[0];
 	    getHrefContentTuple( tupleNode, t );
-	    users += t[0] + ";";
-	    users_links += t[1] + ";";
+	    users += t[0] + ",";
+	    users_links += t[1] + ",";
 	    
 	}
-	chopLastDelimeter(vids, ";");
-	chopLastDelimeter(titles, ";");
-	chopLastDelimeter(users, ";");
-	chopLastDelimeter(users_links, ";");
+	// chopLastDelimeter(vids);
+	// chopLastDelimeter(titles);
+	// chopLastDelimeter(users);
+	// chopLastDelimeter(users_links);
+	vids = vids.substring(0, vids.length) + "]";
+	titles = titles.substring(0, titles.length) + "]";
+	users = users.substring(0, users.length) + "]";
+	users_links = users_links.substring(0, users_links) + "]";
 	
 	
     }
-    localStorage.setItem("videoIds", vids);
-    localStorage.setItem("titles", titles);
-    localStorage.setItem("users", users);
-    localStorage.setItem("ulinks", users_links);
-    console.log("local Storage:");
-    console.log(localStorage);
-    safari.self.tab.dispatchMessage("pr_data", "test.html");
+    // localStorage.setItem("videoIds", vids);
+    // localStorage.setItem("titles", titles);
+    // localStorage.setItem("users", users);
+    // localStorage.setItem("ulinks", users_links);
+    // console.log("local Storage:");
+    // console.log(localStorage);
+    var jsonStr = "{ videoIds:" + vids + ", titles:" + titles + ", users:" + users + ", ulinks:" + users_links + " }";
+    //console.log(jsonStr)
+    safari.self.tab.dispatchMessage("pr_data", jsonStr);
 }
 
 function createContextItem(event)
