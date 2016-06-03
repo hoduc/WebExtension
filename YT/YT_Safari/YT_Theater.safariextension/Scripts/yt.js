@@ -37,6 +37,8 @@ function createInfo(ytVideo)
     var a = document.createElement("a");
     a.href = "https://youtu.be/watch?v=" + ytVideo.id;
     a.innerHTML = ytVideo.title;
+    if( info.firstChild )
+	info.removeChild(info.firstChild);
     info.appendChild(a);
 }
 
