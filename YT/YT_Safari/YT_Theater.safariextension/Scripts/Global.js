@@ -23,11 +23,6 @@ function receiveMsg(event)
 {
     if( event.name == "pr_data" )
     {
-	//console.log( event.message );
-	//open new tab
-	//console.log("prepare to open tab:");
-	//safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + event.message;
-	//console.log("url="+ safari.extension.baseURI + event.message);
 	console.log(event.message);
 	localStorage.setItem("yt_theater", event.message);
 	safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + "test.html";

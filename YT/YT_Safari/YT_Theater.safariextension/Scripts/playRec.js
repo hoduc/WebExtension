@@ -9,6 +9,8 @@ function getHrefContentTuple(nodeName, t)
 function chopLastDelimeter(s, delimeter)
 {
     delimeter = delimeter || ",";
+    if(!s.lastIndexOf(delimeter))
+	return s
     return s.substring(0, s.lastIndexOf(delimeter));
 }
 function getInterestedSegment(nodeName)
@@ -45,10 +47,10 @@ function getInterestedSegment(nodeName)
 	//set local storage
 
 	var ll = interestedNode.getElementsByClassName("yt-shelf-grid-item");
-	var vids = "[";
-	var titles = "[";
-	var users = "[";
-	var users_links = "[";
+	var vids = "";
+	var titles = "";
+	var users = "";
+	var users_links = "";
 	var t = [];
 	for( var i = 0; i < ll.length; i++ )
 	{
@@ -69,25 +71,16 @@ function getInterestedSegment(nodeName)
 	    users_links += t[1] + ",";
 	    
 	}
-	// chopLastDelimeter(vids);
-	// chopLastDelimeter(titles);
-	// chopLastDelimeter(users);
-	// chopLastDelimeter(users_links);
-	vids = vids.substring(0, vids.length) + "]";
-	titles = titles.substring(0, titles.length) + "]";
-	users = users.substring(0, users.length) + "]";
-	users_links = users_links.substring(0, users_links) + "]";
+	vids = "[" + chopLastDelimeter(vids) + "]";
+	titles = "[" + chopLastDelimeter(titles) + "]";
+	users = "[" + chopLastDelimeter(users) + "]";
+	users_links = "[" + chopLastDelimeter(users_links) + "]";
 	
 	
     }
-    // localStorage.setItem("videoIds", vids);
-    // localStorage.setItem("titles", titles);
-    // localStorage.setItem("users", users);
-    // localStorage.setItem("ulinks", users_links);
-    // console.log("local Storage:");
-    // console.log(localStorage);
-    var jsonStr = "{ videoIds:" + vids + ", titles:" + titles + ", users:" + users + ", ulinks:" + users_links + " }";
-    //console.log(jsonStr)
+    var jsonStr = "{ \"videoIds\" :" + "\"" + vids + "\"" + ", \"titles\":" + "\"" + titles + "\"" + "}";
+	//+ ", 'titles':" + titles + ", 'users':" + users + ", 'ulinks':" + users_links + " }";
+    console.log(jsonStr);
     safari.self.tab.dispatchMessage("pr_data", jsonStr);
 }
 

@@ -45,7 +45,7 @@ function createThumbnails(ytli)
 
 function initializeYtListLocalStorage()
 {
-    console.log(localStorage);
+    //console.log(localStorage);
     // var vids = localStorage.getItem("videoIds").split(",");
     // var titles = localStorage.getItem("titles").split(",");
     // var users = localStorage.getItem("users").split(",");
@@ -54,6 +54,9 @@ function initializeYtListLocalStorage()
     // {
     // 	yt.push( new YTVideo( vids[i], titles[i], users[i], ulinks[i] ) );
     // }
+    JSON.parse(localStorage.getItem( "yt_theater" ), function( k,v ){
+	console.log(k);
+    });
     // createThumbnails(yt);
 }
 
