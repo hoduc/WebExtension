@@ -30,31 +30,18 @@ function createThumbnails(ytli)
     }
 }
 
-// function initializeYtList()
-// {
-//     var query = window.location.search.substring(1);
-//     console.log("query=" + query);
-//     var videoIds = query.substring(query.indexOf("=")+1).split("&");
-//     console.log("videoIds:" + videoIds);
-//     for( var i = 0; i < videoIds.length; i++ )
-//     {
-// 	yt.push( new YTVideo( videoIds[i] ) );
-//     }
-//     createThumbnails(yt);
-// }
+function createInfo(ytVideo)
+{
+    console.log(ytVideo);
+    var info = document.getElementById("info");
+    var a = document.createElement("a");
+    a.href = "https://youtu.be/watch?v=" + ytVideo.id;
+    a.innerHTML = ytVideo.title;
+    info.appendChild(a);
+}
 
 function initializeYtListLocalStorage()
 {
-    //console.log(localStorage);
-    // var vids = localStorage.getItem("videoIds").split(",");
-    // var titles = localStorage.getItem("titles").split(",");
-    // var users = localStorage.getItem("users").split(",");
-    // var ulinks = localStorage.getItem("ulinks").split(",");
-    // for( var i = 0 ; i < vids.length; i++ )
-    // {
-    // 	yt.push( new YTVideo( vids[i], titles[i], users[i], ulinks[i] ) );
-    // }
-    // createThumbnails(yt);
 
     var vids = localStorage.getItem("yt_ids").split(",");
     var titles = localStorage.getItem("yt_titles").split(",");
@@ -67,6 +54,7 @@ function initializeYtListLocalStorage()
 	yt.push( new YTVideo( vids[i], titles[i], users[i], ulinks[i] ) );
     }
     createThumbnails(yt);
+    createInfo(yt[0]);
 }
 
 
@@ -74,6 +62,7 @@ function playNext()
 {
     var nextVideo = yt[++cur%yt.length];
     player.cueVideoById(nextVideo.id, nextVideo.startSec, nextVideo.quality);
+    createInfo(nextVideo);
     player.playVideo();
 
     //pop img-top, push to the end
