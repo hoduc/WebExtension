@@ -23,6 +23,7 @@ function chopLastDelimeter(s, delimeter)
 function getInterestedSegment(nodeName)
 {
     var allInterestedNodes = document.getElementsByClassName("feed-item-dismissable");
+    console.log(allInterestedNodes);
     var interestedNode = null;
     for( var i = 0; i < allInterestedNodes.length; i++ )
     {
@@ -35,7 +36,7 @@ function getInterestedSegment(nodeName)
     }
     if( interestedNode == null )
     {
-	console.log("Cannot find any 'Recommended'");
+	console.log("Cannot find any " + nodeName );
     }
     else
     {
@@ -68,7 +69,7 @@ function getInterestedSegment(nodeName)
 function createContextItem(event)
 {
     console.log("adding context item");
-    safari.self.tab.setContextMenuEventUserInfo(event, "Play Recommended");
+    safari.self.tab.setContextMenuEventUserInfo(event, "Play Recommended|Play Recently Uploaded");
 }
 
 function handleCommand(msg)
@@ -81,6 +82,11 @@ function handleCommand(msg)
 	{
 	    console.log( "u click: play recommended" );
 	    getInterestedSegment("Recommended");
+	}
+	else if ( msg.messafe = "pru" )
+	{
+	    console.log( "u click: play recently uploaded" );
+	    getInterestedSegment("Recently Uploaded");
 	}
     }
 }

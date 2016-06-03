@@ -1,10 +1,18 @@
 
+var context = ["Play Recommended", "Play Recently Uploaded"];
+var command = ["pr", "pru"];
+
 function handleContextMenu(event)
 {
     if( event.userInfo )
     {
 	console.log("global:" + event.userInfo);
-	event.contextMenu.appendContextMenuItem("ducho", event.userInfo, "pr");
+	var items = event.userInfo.split("|");
+	console.log(items);
+	for( var i = 0 ; i < items.length; i++ )
+	{
+	    event.contextMenu.appendContextMenuItem(context[i], context[i], command[i]);
+	}
     }
 }
 
@@ -12,10 +20,11 @@ function handleCommand(event)
 {
     //console.log("command clicked!!!");
     //console.log(event.command);
-    if (event.command == "pr" )
+    /*if (event.command == "pr" )
     {
 	safari.application.activeBrowserWindow.activeTab.page.dispatchMessage( "yt_theater", event.command );
-    }
+	}*/
+    safari.application.activeBrowserWindow.activeTab.page.dispatchMessage( "yt_theater", event.command );
 }
 
 
