@@ -1,3 +1,33 @@
+var HOME_LINK = "https://www.youtube.com/";
+var SUB_LINK = HOME_LINK + "feed/subscriptions";
+
+
+var LINK =
+[
+    HOME_LINK,
+    SUB_LINK
+];
+
+var CONTEXT_ITEM =
+[
+    "Play Recommended|Play Recently Uploaded",
+    "Play Today"
+];
+
+var COMMAND =
+[
+    "pr",
+    "pru",
+    "ptd",
+];
+
+var COMMAND_NODE =
+[
+    "Recommended",
+    "Recently Uploaded",
+    "Today"
+];
+
 console.log("hello injected!");
 var dataObject =
 {
@@ -69,24 +99,47 @@ function getInterestedSegment(nodeName)
 function createContextItem(event)
 {
     console.log("adding context item");
-    safari.self.tab.setContextMenuEventUserInfo(event, "Play Recommended|Play Recently Uploaded");
+    console.log("link:" + window.location.href );
+    for( var i = 0; i < LINK.length; i++ )
+    {
+	if( window.location.href == LINK[i] )
+	{
+	    console.log("link:" + LINK[i]);
+	    console.log("context_item:" + CONTEXT_ITEM[i]);
+	    safari.self.tab.setContextMenuEventUserInfo( event, CONTEXT_ITEM[i] );
+	    break;
+	}
+    }
 }
 
 function handleCommand(msg)
 {
     //console.log(msg);
     //only handle relevant message
+    // if( msg.name == "yt_theater" )
+    // {
+    // 	if( msg.message == "pr" )
+    // 	{
+    // 	    console.log( "u click: play recommended" );
+    // 	    getInterestedSegment("Recommended");
+    // 	}
+    // 	else if ( msg.messafe = "pru" )
+    // 	{
+    // 	    console.log( "u click: play recently uploaded" );
+    // 	    getInterestedSegment("Recently Uploaded");
+    // 	}
+    // }
+
     if( msg.name == "yt_theater" )
     {
-	if( msg.message == "pr" )
+	console.log( "u click: play" + msg.message );
+	for( var i = 0; i < COMMAND.length; i++ )
 	{
-	    console.log( "u click: play recommended" );
-	    getInterestedSegment("Recommended");
-	}
-	else if ( msg.messafe = "pru" )
-	{
-	    console.log( "u click: play recently uploaded" );
-	    getInterestedSegment("Recently Uploaded");
+	    if( msg.message == COMMAND[i] )
+	    {
+		getInterestedSegment(COMMAND_NODE[i]);
+		break;
+	    }
 	}
     }
 }

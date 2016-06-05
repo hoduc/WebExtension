@@ -1,6 +1,6 @@
 
-var context = ["Play Recommended", "Play Recently Uploaded"];
-var command = ["pr", "pru"];
+var context = ["Play Recommended", "Play Recently Uploaded", "Play Today"];
+var command = ["pr", "pru", "ptd"];
 
 function handleContextMenu(event)
 {
@@ -9,9 +9,18 @@ function handleContextMenu(event)
 	console.log("global:" + event.userInfo);
 	var items = event.userInfo.split("|");
 	console.log(items);
+	//map item-command
 	for( var i = 0 ; i < items.length; i++ )
 	{
-	    event.contextMenu.appendContextMenuItem(context[i], context[i], command[i]);
+	    for( var j = 0 ; j < context.length; j++ )
+	    {
+		if( items[i] == context[j] )
+		{
+		    console.log(i + "context:" + context[i]);
+		    event.contextMenu.appendContextMenuItem(context[j], context[j], command[j]);
+		}
+	    }
+	    
 	}
     }
 }
@@ -24,6 +33,7 @@ function handleCommand(event)
     {
 	safari.application.activeBrowserWindow.activeTab.page.dispatchMessage( "yt_theater", event.command );
 	}*/
+    console.log("command:" + event.command);
     safari.application.activeBrowserWindow.activeTab.page.dispatchMessage( "yt_theater", event.command );
 }
 
