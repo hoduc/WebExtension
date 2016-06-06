@@ -17,5 +17,13 @@ function handleContextMenu(event)
     }
 }
 
+function handleCommand(event)
+{
+    if( event.command == "sg" )
+    {
+	safari.application.activeBrowserWindow.openTab().url = "https://www.google.com/#q=" + searchContent;
+    }
+}
 
 safari.application.addEventListener("contextmenu", handleContextMenu, false);
+safari.application.addEventListener("command", handleCommand, false);
