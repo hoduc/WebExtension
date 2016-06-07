@@ -67,6 +67,7 @@ function getInterestedSegment(nodeName)
     if( interestedNode == null )
     {
 	console.log("Cannot find any " + nodeName );
+	return;
     }
     else
     {
@@ -98,6 +99,7 @@ function getInterestedSegment(nodeName)
 
 function createContextItem(event)
 {
+    console.log(event);
     console.log("adding context item");
     console.log("link:" + window.location.href );
     for( var i = 0; i < LINK.length; i++ )
