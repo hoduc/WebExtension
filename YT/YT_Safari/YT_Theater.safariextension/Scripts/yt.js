@@ -44,7 +44,7 @@ function createInfo(ytVideo)
 
 function initializeYtListLocalStorage()
 {
-
+    console.log(localStorage);
     var vids = localStorage.getItem("yt_ids").split(",");
     var titles = localStorage.getItem("yt_titles").split(",");
     var users = localStorage.getItem("yt_users").split(",");

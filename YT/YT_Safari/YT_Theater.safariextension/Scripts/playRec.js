@@ -52,8 +52,9 @@ function chopLastDelimeter(s, delimeter)
 }
 function getInterestedSegment(nodeName)
 {
+    console.log("trying to find:" + nodeName);
     var allInterestedNodes = document.getElementsByClassName("feed-item-dismissable");
-    console.log(allInterestedNodes);
+    //console.log(allInterestedNodes);
     var interestedNode = null;
     for( var i = 0; i < allInterestedNodes.length; i++ )
     {
@@ -94,6 +95,8 @@ function getInterestedSegment(nodeName)
 	    
 	}
     }
+    console.log("found dataObject");
+    console.log(dataObject);
     safari.self.tab.dispatchMessage("pr_data", dataObject);
 }
 
@@ -139,6 +142,8 @@ function handleCommand(msg)
 	{
 	    if( msg.message == COMMAND[i] )
 	    {
+		console.log("dataObject:");
+		console.log(dataObject);
 		getInterestedSegment(COMMAND_NODE[i]);
 		break;
 	    }

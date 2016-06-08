@@ -42,14 +42,21 @@ function receiveMsg(event)
 {
     if( event.name == "pr_data" )
     {
+	
+	//remove storeage
+	localStorage.removeItem("yt_ids");
+	localStorage.removeItem("yt_titles");
+	localStorage.removeItem("yt_users");
+	localStorage.removeItem("yt_ulinks");
+	console.log("dataobject:");
 	//console.log(event.message);
-	console.log(dataObject)
 	var dataObject = event.message;
+	console.log(dataObject);
 	localStorage.setItem("yt_ids", dataObject.videoIds);
 	localStorage.setItem("yt_titles", dataObject.titles);
 	localStorage.setItem("yt_users", dataObject.users);
 	localStorage.setItem("yt_ulinks", dataObject.u_links);
-	console.log(localStorage);
+	//console.log(localStorage);
 	safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + "test.html";
     }
 }
