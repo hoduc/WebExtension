@@ -1,4 +1,7 @@
 var searchContent = null;
+var context = ["with Google", "with Google Images"];
+var command = ["sg", "sgi"];
+var command_link = ["https://www.google.com/#q=", "https://www.google.com/search?site=&tbm=isch&source=hp&q="]
 
 function handleContextMenu(event)
 {
@@ -11,17 +14,29 @@ function handleContextMenu(event)
 	    contextItemTitle = contextItemTitle.substring(0,11) + "...";	
 	}
 	searchContent = contextItemTitle;
-	contextItemTitle = "Search " + "\"" + contextItemTitle + "\"" + " with Google";
-	console.log(contextItemTitle);
-	event.contextMenu.appendContextMenuItem(contextItemTitle, contextItemTitle, "sg");
+	for( var i = 0; i < context.length; i++ )
+	{
+	    var cit = "Search " + "\"" + contextItemTitle + " \"" + context[i];
+	    event.contextMenu.appendContextMenuItem(contextItemTitle, contextItemTitle, command[i]);
+	}
+	// contextItemTitle = "Search " + "\"" + contextItemTitle + "\"" + " with Google";
+	// console.log(contextItemTitle);
+	// event.contextMenu.appendContextMenuItem(contextItemTitle, contextItemTitle, "sg");
     }
 }
 
 function handleCommand(event)
 {
-    if( event.command == "sg" )
+    // if( event.command == "sg" )
+    // {
+    // 	safari.application.activeBrowserWindow.openTab().url = "https://www.google.com/#q=" + searchContent;
+    // }
+    for( var i = 0; i < command.length; i++ )
     {
-	safari.application.activeBrowserWindow.openTab().url = "https://www.google.com/#q=" + searchContent;
+	if( event.command == command[i] )
+	{
+	    safari.application.activeBrowserWindow.openTab().url = command_link[i] + encodeURI( searchContent );
+	}
     }
 }
 

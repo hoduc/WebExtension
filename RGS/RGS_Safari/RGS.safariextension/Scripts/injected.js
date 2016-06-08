@@ -3,7 +3,7 @@ console.log("hello google search injected");
 function createContextItem(event)
 {
     // console.log(event.target.textContent);
-    // console.log(window.getSelection());
+    console.log(window.getSelection());
     var sel = window.getSelection();
     var begin = sel.anchorOffset;
     var end = sel.focusOffset;
