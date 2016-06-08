@@ -1,6 +1,6 @@
 
-var context = ["Play Recommended", "Play Recently Uploaded", "Play Today"];
-var command = ["pr", "pru", "ptd"];
+var context = ["Play Recommended", /*"Play Recently Uploaded",*/"Play Watch It Again",  "Play Today"];
+var command = ["pr", /*"pru",*/"pwa", "ptd"];
 
 function handleContextMenu(event)
 {

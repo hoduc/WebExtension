@@ -10,21 +10,23 @@ var LINK =
 
 var CONTEXT_ITEM =
 [
-    "Play Recommended|Play Recently Uploaded",
+    "Play Recommended|Play Watch It Again",
     "Play Today"
 ];
 
 var COMMAND =
 [
     "pr",
-    "pru",
+    /*"pru",*/
+    "pwa",
     "ptd",
 ];
 
 var COMMAND_NODE =
 [
     "Recommended",
-    "Recently Uploaded",
+    /*"Recently Uploaded",*/
+    "Watch It Again",
     "Today"
 ];
 
@@ -72,7 +74,7 @@ function getInterestedSegment(nodeName)
     }
     else
     {
-
+	console.log(interestedNode);
 	var ll = interestedNode.getElementsByClassName("yt-shelf-grid-item");
 	var vids = "";
 	var titles = "";
